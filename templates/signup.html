@@ -11,19 +11,19 @@
       <img src="/" alt="투어룩 로고" />
       <h2>회원가입</h2>
     </div>
-    <form action="#">
+    <form action="/signup" method="POST">
       <div>
-        <input type="text" id="user_id" />
+        <input type="text" id="user_id" name="user_id" />
         <label for="user_id"></label>
         <button>중복 확인</button>
       </div>
       <div>
         <label for="user_name"></label>
-        <input type="text" id="user_name" />
+        <input type="text" id="user_name" name="user_nickname"/>
       </div>
       <div>
         <label for="user_pwd1"></label>
-        <input type="password" id="user_pwd1" />
+        <input type="password" id="user_pwd1" name="user_password"/>
       </div>
       <div>
         <label for="user_pwd2"></label>
