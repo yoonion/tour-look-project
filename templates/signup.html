@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-</head>
-<body>
-    <h1>회원가입 페이지</h1>
-</body>
+    <link rel="stylesheet" href="../static/reset.css" />
+  </head>
+  <body>
+    <div class="flex-box">
+      <img src="/" alt="투어룩 로고" />
+      <h2>회원가입</h2>
+    </div>
+    <form action="#">
+      <div>
+        <input type="text" id="user_id" />
+        <label for="user_id"></label>
+        <button>중복 확인</button>
+      </div>
+      <div>
+        <label for="user_name"></label>
+        <input type="text" id="user_name" />
+      </div>
+      <div>
+        <label for="user_pwd1"></label>
+        <input type="password" id="user_pwd1" />
+      </div>
+      <div>
+        <label for="user_pwd2"></label>
+        <input type="password" id="user_pwd2" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
 </html>
