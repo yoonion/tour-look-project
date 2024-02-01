@@ -76,7 +76,8 @@ def login():
 
         user = User.query.filter_by(user_id=user_id, user_password=user_password).first()
         if user is not None: # 쿼리 데이터가 존재하면
-            session['user_id'] = user_id # userid를 session에 저장한다.
+            session['user_pk'] = user.user_pk # user pk를 session에 저장한다.
+            session['user_id'] = user_id # user id를 session에 저장한다.
             return redirect('/')
         else:
             return '회원 정보가 일치하지 않습니다.' # 쿼리 데이터가 없으면 출력
@@ -88,7 +89,8 @@ def login():
 @app.route("/post", methods=['GET', 'POST'])
 def post_save():
     if request.method == 'POST':
-        userPk = request.form['user_pk']
+        # userPk = request.form['user_pk']
+        userPk = session['user_pk']
         title = request.form['post_title']
         content = request.form['post_content']
         category = request.form['post_local_cate']
@@ -104,7 +106,7 @@ def post_save():
             "comments": []
         }
 
-        return redirect(url_for('post_detail', post_id = post.post_pk))
+        return redirect(url_for('post_detail', post_pk = post.post_pk))
     else:
         return render_template('post_save.html')
 
