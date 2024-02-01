@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="reset.css" />
-  </head>
-  <body>
-    <img src="/" alt="투어룩 로고" />
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../static/reset.css" />
+  <link rel="stylesheet" href="../static/login.css">
+</head>
+
+<body>
+  <img src="/" alt="투어룩 로고" />
+  <div class="inner">
     <h2>Login</h2>
     <form action="/login" method="POST">
       <div>
@@ -21,7 +24,11 @@
       </div>
       <button type="submit">로그인</button>
     </form>
-    <p>회원가입을 하지 않으셨다면 ?</p>
-    <a href="#">회원가입</a>
-  </body>
+    <div class="join">
+      <p>회원가입을 하지 않으셨다면 ?</p>
+      <a href="/signup">회원가입</a>
+    </div>
+  </div>
+</body>
+
 </html>

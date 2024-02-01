@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+body {
+    font-family: 'Noto Sans Malayalam', sans-serif;
+    color: #222222;
+    height: 9999px;
+}
+.inner {
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+    border: 1px solid red;
+    padding-top: 150px;
+}
+.row {
+    display: flex;
+}
+h2 {
+    border: 1px solid #000;
+    text-align: center;
+    font-weight: 700;
+    font-size: 70px;
+    color: #0D99FF;
+}
+
+/* Input field styles */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+label {
+
+}
+/* Button styles */
+button[type="submit"] {
+    background-color: #0D99FF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 800px;
+    height: 80px;
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+button[type="submit"]:hover {
+    background-color: #064674;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* join*/
+.join {
+    text-align: center;
+}
+.join p {
+    margin-top: 80px;
+}
+a {
+    color: #0D99FF;
+}
