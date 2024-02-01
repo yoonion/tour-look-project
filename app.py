@@ -151,7 +151,6 @@ def post_detail(post_pk):
             "comments": comment_list
         }
 
-        print(response)
         return render_template('post_detail.html', data = response)
 
 if __name__ == "__main__":
