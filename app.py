@@ -43,6 +43,10 @@ class Comment(db.Model):
 with app.app_context():
     db.create_all()
 
+# 업로드 파일을 저장할 폴더 설정
+UPLOAD_FOLDER = 'static/post-images/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # 메인 (리스트 지역별 검색 가능)
 @app.route("/")
 def main():
@@ -66,18 +70,19 @@ def main():
 def signup():
     if request.method == 'POST':
         userid = request.form['user_id']
-        password = request.form['user_password']
-        nickname = request.form['user_nickname']
+        finduser = User.query.filter_by(user_id = userid).first()
+        if not finduser: # 중복 회원이 없는 경우
+            password = request.form['user_password']
+            nickname = request.form['user_nickname']
 
-        user = User(user_id = userid, user_password = password, user_nickname = nickname)
-        db.session.add(user)
-        db.session.commit()
+            user = User(user_id = userid, user_password = password, user_nickname = nickname)
+            db.session.add(user)
+            db.session.commit()
 
-        response = {
-            "msg": "회원가입 성공!",
-        }
+            return redirect(url_for('main'))
+        else:
+            return jsonify({"msg": "이미 존재하는 아이디입니다."})
 
-        return jsonify(response), 200
     else:
         return render_template('signup.html')
 
@@ -108,8 +113,12 @@ def logout():
 # 게시글 등록 페이지
 @app.route("/post", methods=['GET', 'POST'])
 def post_save():
+    if not session.get('user_id'):
+        return redirect(url_for('login'))
+
+    # 로그인 되어 있는 경우
     if request.method == 'POST':
-        # userPk = request.form['user_pk']
+    # userPk = request.form['user_pk']
         userPk = session['user_pk']
         title = request.form['post_title']
         content = request.form['post_content']
@@ -119,13 +128,20 @@ def post_save():
         db.session.add(post)
         db.session.commit()
 
+        file = request.files['file']
+        if file:
+            Post.query.filter_by()
+            filename = str(post.post_pk)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            return jsonify({"msg": "이미지를 업로드 해주세요."})
+
         context = {
             "post_title": title,
             "post_content": content,
             "post_local_cate": category,
             "comments": []
-        }
-
+        }   
         return redirect(url_for('post_detail', post_pk = post.post_pk))
     else:
         return render_template('post_save.html')
@@ -134,18 +150,8 @@ def post_save():
 @app.route("/post/<post_pk>")
 def post_detail(post_pk):
     post = Post.query.filter_by(post_pk = post_pk).first()
-    comments = Comment.query.filter_by(post_pk = post_pk).all()
 
-    comment_list = []
-    for comment in comments:
-        comment_list.append(
-            {
-                "user_nickname": comment.comment_user_nickname,
-                "comment_content": comment.comment_content
-            }
-        )
-
-    if not post:
+    if not post: # 게시글이 없는 경우
         response = {
             "status": 404,
             "msg":'해당 게시글을 찾을 수 없습니다.'
@@ -155,12 +161,26 @@ def post_detail(post_pk):
         title = post.post_title
         content = post.post_content
         category = post.post_local_cate
+
+        comments = Comment.query.filter_by(post_pk = post_pk).all()
+
+        comment_list = []
+        for comment in comments:
+            comment_list.append(
+                {
+                    "user_nickname": comment.comment_user_nickname,
+                    "comment_content": comment.comment_content
+                }
+            )
+
+        img_url = '/static/post-images/' + str(post.post_pk)
         
         response = {
             "post_pk": post_pk,
             "post_title": title,
             "post_content": content,
             "post_local_cate": category,
+            "img_url": img_url,
             "comments": comment_list
         }
 
