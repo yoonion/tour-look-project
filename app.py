@@ -20,6 +20,25 @@ class User(db.Model):
     def __repr__(self):
         return f'username={self.user_id}, pwd={self.user_password}'
 
+class Post(db.Model):
+    post_pk = db.Column(db.Integer, primary_key=True)
+    user_pk = db.Column(db.Integer, nullable=False)
+    post_title = db.Column(db.String(255), nullable=False)
+    post_content = db.Column(db.Text, nullable=False)
+    post_local_cate = db.Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        return f'제목={self.post_title}, 작성자 고유번호={self.user_pk}'
+
+class Comment(db.Model):
+    comment_pk = db.Column(db.Integer, primary_key=True)
+    post_pk = db.Column(db.Integer, nullable=False)
+    comment_user_pk = db.Column(db.Integer, nullable=False)
+    comment_content = db.Column(db.Text, nullable=False)
+
+    def __repr__(self):
+        return f'게시글 고유번호={self.post_pk}, 작성자 고유번호={self.user_pk}'
+
 with app.app_context():
     db.create_all()
 
@@ -54,9 +73,28 @@ def login():
     return render_template('login.html')
 
 # 게시글 등록 페이지
-@app.route("/post")
+@app.route("/post", methods=['GET', 'POST'])
 def post_save():
-    return render_template('post_save.html')
+    if request.method == 'POST':
+        userPk = request.form['user_pk']
+        title = request.form['post_title']
+        content = request.form['post_content']
+        category = request.form['post_local_cate']
+
+        post = Post(user_pk = userPk, post_title = title, post_content = content, post_local_cate = category)
+        db.session.add(post)
+        db.session.commit()
+
+        context = {
+            "post_title": title,
+            "post_content": content,
+            "post_local_cate": category,
+            "comments": []
+        }
+
+        return render_template('post_detail.html', response = context)
+    else:
+        return render_template('post_save.html')
 
 # 게시글 상세 페이지
 @app.route("/post/<post_id>")
