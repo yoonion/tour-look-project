@@ -115,7 +115,17 @@ def post_save():
 @app.route("/post/<post_pk>")
 def post_detail(post_pk):
     post = Post.query.filter_by(post_pk = post_pk).first()
-    
+    comments = Comment.query.filter_by(post_pk = post_pk).all()
+
+    comment_list = []
+    for comment in comments:
+        comment_list.append(
+            {
+                "user_nickname": comment.comment_user_nickname,
+                "comment_content": comment.comment_content
+            }
+        )
+
     if not post:
         response = {
             "status": 404,
@@ -128,16 +138,14 @@ def post_detail(post_pk):
         category = post.post_local_cate
         
         response = {
+            "post_pk": post_pk,
             "post_title": title,
             "post_content": content,
             "post_local_cate": category,
-            "comments": [
-                {
-                    "user_nickname": "사용자 닉네임",
-                    "comment_content": "사용자가 작성한 댓글 내용입니다."
-                }
-            ]
+            "comments": comment_list
         }
+
+        print(response)
         return render_template('post_detail.html', data = response)
 
 if __name__ == "__main__":
