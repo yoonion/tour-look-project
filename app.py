@@ -111,8 +111,34 @@ def post_save():
         return render_template('post_save.html')
 
 # 게시글 상세 페이지
-@app.route("/post/<post_id>")
-def post_detail(post_id):
+@app.route("/post/<post_pk>")
+def post_detail(post_pk):
+    post = Post.query.filter_by(post_pk = post_pk).first()
+    
+    if not post:
+        return redirect(url_for('main'), msg = '해당 게시글을 찾을 수 없습니다.') 
+    else:
+        title = post.post_title
+        content = post.post_content
+        category = post.post_local_cate
+        
+        response = {
+            "post_title": title,
+            "post_content": content,
+            "post_local_cate": category,
+            "comments": [
+                {
+                    "user_nickname": "사용자 닉네임",
+                    "comment_content": "사용자가 작성한 댓글 내용입니다."
+                }
+            ]
+        }
+
+        print('응답 결과= ', response)
+        return render_template('post_detail.html', data = response)
+
+
+
     return render_template('post_detail.html')
 
 if __name__ == "__main__":
