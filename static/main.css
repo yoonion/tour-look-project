@@ -50,6 +50,8 @@
 
 .card-container {
   display: flex;
+  padding: 0 200px;
+  box-sizing: border-box;
   flex-wrap: wrap;
   gap: 20px;
   row-gap: 20px;
