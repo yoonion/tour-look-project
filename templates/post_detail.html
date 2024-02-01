@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 상세보기</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>게시글 상세보기 페이지</h1>
-</body>
+    <div class="detail-container">
+      <h2 class="detail-title"></h2>
+      <p class="detail-user"></p>
+      <p class="detail-main"></p>
+    </div>
+    <form action="#">
+      <!-- display: flex -->
+      <label for="comment">댓글:</label>
+      <textarea
+        id="comment"
+        name="comment"
+        rows="2"
+        cols="50"
+        placeholder="100자 이내로 작성해주세요!"></textarea>
+
+      <input type="submit" value="제출" />
+    </form>
+    <div class="comment-container">
+      <!-- ffor돌리기 -->
+      <div class="comment-card">
+        <p class="comment-user"></p>
+        <p class="comment-main"></p>
+      </div>
+    </div>
+  </body>
 </html>
