@@ -130,8 +130,8 @@ def logout():
     session.clear()
     return redirect('/')
 
-# 게시글 등록 페이지
-@app.route("/post", methods=['GET', 'POST'])
+# 게시글 CRUD
+@app.route("/post", methods=['GET', 'POST', 'PUT'])
 def post_save():
     if not session.get('user_id'):
         return redirect(url_for('login'))
@@ -163,6 +163,19 @@ def post_save():
             "comments": []
         }   
         return redirect(url_for('post_detail', post_pk = post.post_pk))
+    elif request.method == 'PUT':
+        updatePost = request.get_json()
+        
+        post_pk = updatePost.get('post_pk')
+        post = Post.query.get(post_pk)
+        
+        post.post_title = updatePost.get('post_title')
+        post.post_content = updatePost.get('post_content')
+        post.post_local_cate = updatePost.get('post_local_cate')
+
+        db.session.commit()
+
+        return redirect(url_for('post_detail', post_pk = post_pk))
     else:
         return render_template('post_save.html')
 
@@ -205,6 +218,26 @@ def post_detail(post_pk):
         }
 
         return render_template('post_detail.html', data = response)
+
+# 게시글 수정 페이지
+@app.route('/post/update/<post_pk>')
+def post_update(post_pk):
+    post = Post.query.get(post_pk)
+
+    if not post: # 게시글이 없는 경우
+        response = {
+            "status": 404,
+            "msg":'해당 게시글을 찾을 수 없습니다.'
+        }
+        return jsonify(response), 404
+    else:
+        response = {
+            "post_pk": post.post_pk,
+            "post_title": post.post_title,
+            "post_content": post.post_content,
+            "post_local_cate": post.post_local_cate
+        }
+        return render_template('post_update.html', data = response)
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
