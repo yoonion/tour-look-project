@@ -35,9 +35,10 @@ class Comment(db.Model):
     post_pk = db.Column(db.Integer, nullable=False)
     comment_user_pk = db.Column(db.Integer, nullable=False)
     comment_content = db.Column(db.Text, nullable=False)
+    comment_user_nickname = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return f'게시글 고유번호={self.post_pk}, 작성자 고유번호={self.user_pk}'
+        return f'게시글 고유번호={self.post_pk}, 작성자 닉네임={self.comment_user_nickname} '
 
 with app.app_context():
     db.create_all()
@@ -116,7 +117,11 @@ def post_detail(post_pk):
     post = Post.query.filter_by(post_pk = post_pk).first()
     
     if not post:
-        return redirect(url_for('main'), msg = '해당 게시글을 찾을 수 없습니다.') 
+        response = {
+            "status": 404,
+            "msg":'해당 게시글을 찾을 수 없습니다.'
+        }
+        return jsonify(response), 404
     else:
         title = post.post_title
         content = post.post_content
@@ -133,13 +138,7 @@ def post_detail(post_pk):
                 }
             ]
         }
-
-        print('응답 결과= ', response)
         return render_template('post_detail.html', data = response)
-
-
-
-    return render_template('post_detail.html')
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
