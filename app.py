@@ -210,6 +210,9 @@ def post_detail(post_pk):
 @app.route("/comment", methods=['POST'])
 def comment():
     if request.method== 'POST' :
+        if not session.get('user_id'):
+            return redirect(url_for('login'))
+    
         if session['user_pk'] : 
             user_pk = session['user_pk']  # user pk를 session에 저장한다.
             comment_content = request.form['comment_content']
