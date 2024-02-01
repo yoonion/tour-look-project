@@ -49,9 +49,21 @@ def signup():
         return render_template('signup.html')
 
 # 로그인 페이지
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        user_password = request.form['user_pwd']
+
+        user = User.query.filter_by(user_id=user_id, user_password=user_password).first()
+        if user is not None: # 쿼리 데이터가 존재하면
+            session['user_id'] = user_id # userid를 session에 저장한다.
+            return redirect('/')
+        else:
+            return '회원 정보가 일치하지 않습니다.' # 쿼리 데이터가 없으면 출력
+        
+    else:
+        return render_template('login.html')
 
 # 게시글 등록 페이지
 @app.route("/post")
