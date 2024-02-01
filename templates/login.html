@@ -10,15 +10,16 @@
     <img src="/" alt="투어룩 로고" />
 
     <h2>Login</h2>
-    <form action="#">
+    <form action="/login" method="POST">
       <div>
         <label for="user_id">ID: </label>
-        <input type="text" id="user_id" />
+        <input type="text" name="user_id" id="user_id" />
       </div>
       <div>
         <label for="user_pwd">Password</label>
-        <input type="password" id="user_pwd" />
+        <input type="password" name="user_pwd" id="user_pwd" />
       </div>
+      <button type="submit">로그인</button>
     </form>
     <p>회원가입을 하지 않으셨다면 ?</p>
     <a href="#">회원가입</a>
