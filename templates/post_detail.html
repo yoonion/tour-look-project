@@ -11,27 +11,34 @@
     <div class="detail-container">
       <h2 class="detail-title"></h2>
       <p class="detail-local">#서울/경기</p>
-      <p class="detail-user"></p>
-      <p class="detail-main"></p>
+      <p class="detail-user">{{ data.post_title }}</p>
+      <p class="detail-main">{{ data.post_content }}</p>
     </div>
-    <form action="#">
+
+    <br><br><br><br><br><br><br>
+
+    <form action="/comment" method="POST">
+      <input type ="hidden" name="post_pk" value="1">
       <!-- display: flex -->
       <label for="comment">댓글:</label>
       <textarea
         id="comment"
-        name="comment"
+        name="comment_content"
         rows="2"
         cols="50"
         placeholder="100자 이내로 작성해주세요!"></textarea>
 
-      <input type="submit" value="제출" />
+      <input type="submit" value="등록" />
     </form>
+
     <div class="comment-container">
       <!-- ffor돌리기 -->
-      <div class="comment-card">
-        <p class="comment-user"></p>
-        <p class="comment-main"></p>
-      </div>
+      {% for comment in data.comments %}
+        <div class="comment-card">
+          <p class="comment-user">{{ comment.user_nickname }}</p>
+          <p class="comment-main">{{ comment.comment_content }}</p>
+        </div>
+      {% endfor %}
     </div>
   </body>
 </html>
