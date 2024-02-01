@@ -4,29 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="../static/reset.css" />
+    <link rel="stylesheet" href="../static/login.css" />
   </head>
   <body>
-    <img src="/" alt="투어룩 로고" />
-    <div class="inner">
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-      <div>
-        <label for="user_id">ID: </label>
-        <input type="text" name="user_id" id="user_id" />
+    <div class="main-container">
+      <div class="inner">
+        <div class="flex-box">
+          <img src="/static/tourlook_logo.svg" alt="투어룩 로고" />
+          <h2>Login</h2>
+        </div>
+        <form action="/login" method="POST" class="form">
+          <div class="input-box">
+            <label for="user_id">ID: </label>
+            <input type="text" name="user_id" id="user_id" placeholder="아이디를 입력해주세요" />
+          </div>
+          <div class="input-box">
+            <label for="user_pwd">Password</label>
+            <input
+              type="password"
+              name="user_pwd"
+              id="user_pwd"
+              placeholder="비밀번호를 입력해주세요" />
+          </div>
+          <button type="submit">로그인</button>
+        </form>
+        <div class="join">
+          <p>회원가입을 하지 않으셨다면 ?</p>
+          <a href="/signup">회원가입</a>
+        </div>
       </div>
-      <div>
-        <label for="user_pwd">Password</label>
-        <input type="password" name="user_pwd" id="user_pwd" />
-      </div>
-      <button type="submit">로그인</button>
-    </form>
-    <div class="join">
-      <p>회원가입을 하지 않으셨다면 ?</p>
-      <a href="/signup">회원가입</a>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
