@@ -43,10 +43,23 @@ class Comment(db.Model):
 with app.app_context():
     db.create_all()
 
-# 메인
+# 메인 (리스트 지역별 검색 가능)
 @app.route("/")
 def main():
-    return render_template('index.html')
+    
+    try: # 파라미터가 있는경우
+        param = request.args["post_local_cate"] 
+        if(param == '전체'):
+            param = ""
+    except KeyError: # 쿼리 파라미터 없는경우 예외처리
+        param = ""
+
+    if len(param) > 0:
+        post_list = Post.query.filter_by(post_local_cate=param).all()
+    else:
+        post_list = Post.query.all()
+    
+    return render_template('index.html', post_list = post_list)
 
 # 회원가입 페이지
 @app.route('/signup', methods=['GET', 'POST'])
