@@ -1,0 +1,17 @@
+.save-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 70px;
+  color: #0d99ff;
+}
+
+.save-container form {
+}
