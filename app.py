@@ -53,11 +53,6 @@ def signup():
 def login():
     return render_template('login.html')
 
-# 게시글 리스트 페이지
-@app.route("/posts")
-def post_list():
-    return render_template('post_list.html')
-
 # 게시글 등록 페이지
 @app.route("/post")
 def post_save():
