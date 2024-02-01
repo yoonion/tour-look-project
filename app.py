@@ -92,7 +92,7 @@ def post_save():
             "comments": []
         }
 
-        return render_template('post_detail.html', response = context)
+        return redirect(url_for('post_detail', post_id = post.post_pk))
     else:
         return render_template('post_save.html')
 
