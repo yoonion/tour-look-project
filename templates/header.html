@@ -13,11 +13,13 @@
         <img src="../static/tourlook_logo.svg" alt="" />
       </h1>
       <div class="header-right">
-        <a href="/login">로그인</a>
-        <a href="/signup">회원가입</a>
+        
         {%if session['user_id']%} {{session['user_id']}} 님, 환영합니다.
-        <a href="/logout">로그아웃</a>
-        {%endif%}
+          <a href="/logout">로그아웃</a>
+        {% else %}
+          <a href="/login">로그인</a>
+          <a href="/signup">회원가입</a>
+        {% endif %}
       </div>
     </header>
   </body>
