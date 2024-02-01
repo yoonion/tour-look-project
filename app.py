@@ -85,6 +85,12 @@ def login():
         
     else:
         return render_template('login.html')
+    
+# 로그아웃
+@app.route("/logout", methods=['GET'])
+def logout():
+    session.clear()
+    return redirect('/')
 
 # 게시글 등록 페이지
 @app.route("/post", methods=['GET', 'POST'])
