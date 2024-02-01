@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 등록</title>
-</head>
-<body>
-        <h1>게시글 등록 페이지</h1>
-</body>
+  </head>
+  <body>
+    <div class="save-container">
+      <form action="#">
+        <div class="save-location">
+          <label for="save-location">여행 도시</label>
+          <select name="save-location" id="save-location">
+            <option value="">전체</option>
+            <option value="">경기 / 서울</option>
+            <option value="">1</option>
+            <option value="">2</option>
+            <option value="">3</option>
+            <option value="">4</option>
+            <option value="">5</option>
+            <option value="">6</option>
+          </select>
+        </div>
+        <div class="save-title">
+          <label for="save-title">제목</label>
+          <textarea name="save-title" id="save-title" cols="100" rows="2"></textarea>
+        </div>
+        <div class="save-main">
+          <label for="save-main">제목</label>
+          <textarea name="save-main" id="save-main" cols="100" rows="20"></textarea>
+        </div>
+        <button type="submit">글 등록</button>
+      </form>
+    </div>
+  </body>
 </html>
