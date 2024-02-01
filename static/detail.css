@@ -1,2 +1,39 @@
 .main-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.main-container > h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #0d99ff;
+  margin-top: 100px;
+}
+.detail-container {
+  width: 600px;
+  padding: 30px;
+  box-sizing: border-box;
+  /* height: 600px; */
+  border: 3px solid #333;
+}
+.detail-container .detail-title {
+  width: 100%;
+  height: fit-content;
+  border: 1px solid #333;
+  font-size: 24px;
+  line-height: 30px;
+}
+.detail-container .detail-local {
+  width: 100%;
+  height: fit-content;
+  border: 1px solid #333;
+  line-height: 30px;
+}
+.detail-contaier .detail-main {
+  width: 100%;
+  height: fit-content;
+  border: 1px solid #333;
+  line-height: 30px;
 }

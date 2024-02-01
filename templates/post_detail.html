@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 상세보기</title>
     <link rel="stylesheet" href="../static/reset.css" />
-    <link rel="stylesheet" href="../static/main.css" />
+    <link rel="stylesheet" href="../static/detail.css" />
   </head>
   <body>
     <div class="main-container">
-      <h1>게시글 상세보기 페이지</h1>
+      {% include './header.html' %}
+
+      <h2>게시글 상세보기 페이지</h2>
       <div class="detail-container">
-        <h2 class="detail-title"></h2>
-        <p class="detail-local">#서울/경기</p>
-        <p class="detail-user">{{ data.post_title }}</p>
+        <h3 class="detail-title">{{ data.post_title }}</h3>
+        <p class="detail-local">추천 지역: {{ data.post_local_cate }}</p>
         <p class="detail-main">{{ data.post_content }}</p>
       </div>
       <form action="/comment" method="POST">
