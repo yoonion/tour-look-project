@@ -132,3 +132,14 @@ button {
   cursor: pointer;
   border: none;
 }
+
+a {
+  color: initial;
+  text-decoration: none;
+  outline: none;
+}
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}

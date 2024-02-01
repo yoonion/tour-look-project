@@ -4,102 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tourlook</title>
-    <link rel="stylesheet" href="reset.css" />
-
-    <style>
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .card {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-right: 20px;
-        width: 300px; /* 카드의 폭을 조절할 수 있습니다. */
-        margin-bottom: 20px;
-      }
-
-      .thumbnail {
-        width: 100%;
-        height: auto;
-      }
-
-      .card-content {
-        padding: 15px;
-      }
-
-      h2 {
-        margin-top: 0;
-      }
-
-      p {
-        margin: 0;
-      }
-    </style>
+    <link rel="stylesheet" href="../static/reset.css" />
+    <link rel="stylesheet" href="../static/main.css" />
   </head>
   <body>
-    <header>
-      <div>
-        {%if session['user_id']%}
-          {{session['user_id']}} 님, 환영합니다.
-        {%endif%}
-      </div>
-      
-      <h1>
-        <img src="/" alt="투어룩 로고" />
-      </h1>
-      <a href="/login">로그인</a>
-      <a href="/signup">회원가입</a>
-    </header>
-
-    <br><br>
-
     <main>
-      
       <!-- 검색창 대신 radio 버튼으로 원하는 곳 구현 -->
-      <div>
-        <form action="/">
-          <label for="lang">지역 검색</label>
-          <select name="post_local_cate">
-            <option value="전체">전체</option>
-            <option value="서울">서울</option>
-            <option value="경기도">경기도</option>
-            <option value="인천">인천</option>
-            <option value="강원도">강원도</option>
-            <option value="충청북도">충청북도</option>
-            <option value="충청남도">충청남도</option>
-            <option value="전라북도">전라북도</option>
-            <option value="전라남도">전라남도</option>
-            <option value="경상북도">경상북도</option>
-            <option value="경상남도">경상남도</option>
-            <option value="제주도">제주도</option>
-            <option value="울릉도/독도">울릉도/독도</option>
-          </select>
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
+      <div class="main-container">
+        {% include './header.html' %}
+        <div class="flex-container">
+          <form action="/" class="main-search-form">
+            <label for="lang">여행 지역 검색</label>
+            <select name="post_local_cate">
+              <option value="전체">전체</option>
+              <option value="서울">서울</option>
+              <option value="경기도">경기도</option>
+              <option value="인천">인천</option>
+              <option value="강원도">강원도</option>
+              <option value="충청북도">충청북도</option>
+              <option value="충청남도">충청남도</option>
+              <option value="전라북도">전라북도</option>
+              <option value="전라남도">전라남도</option>
+              <option value="경상북도">경상북도</option>
+              <option value="경상남도">경상남도</option>
+              <option value="제주도">제주도</option>
+              <option value="울릉도/독도">울릉도/독도</option>
+            </select>
+            <input type="submit" value="Submit" />
+          </form>
 
-      <br><br>
+          <!--  메인 리스트 리스트 ffor돌려서 받아오기 -->
+          <!-- 카드 형식의 리스트 아이템 예제 -->
 
-      <!--  메인 리스트 리스트 ffor돌려서 받아오기 -->
-      <!-- 카드 형식의 리스트 아이템 예제 -->
-
-      <div class="container">
-        {% for post in post_list %}
-        <div class="card">
-          <img src="이미지_경로_1.jpg" alt="이미지 1" class="thumbnail">
-          <div class="card-content">
-              <h2>{{ post.post_title }}</h2>
-              <p>{{ post.post_content }}</p>
+          <div class="card-container">
+            {% for post in post_list %}
+            <div class="card-box">
+              <a href="#" class="card">
+                <div class="img-box">
+                  <img src="이미지_경로_1.jpg" alt="이미지 1" class="thumbnail" />
+                </div>
+                <div class="card-content">
+                  <h2>{{ post.post_title }}</h2>
+                  <p>{{ post.post_content }}</p>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
           </div>
         </div>
-        {% endfor %}
       </div>
-
-    <!-- 추가 카드 아이템들을 여기에 계속 추가할 수 있습니다. -->
-
+      <!-- 추가 카드 아이템들을 여기에 계속 추가할 수 있습니다. -->
     </main>
   </body>
 </html>
