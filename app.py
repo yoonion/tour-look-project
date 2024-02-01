@@ -79,7 +79,7 @@ def signup():
             db.session.add(user)
             db.session.commit()
 
-            return redirect(url_for('main'))
+            return redirect(url_for('login'))
         else:
             return jsonify({"msg": "이미 존재하는 아이디입니다."})
 
