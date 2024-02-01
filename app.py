@@ -205,6 +205,29 @@ def post_detail(post_pk):
         }
 
         return render_template('post_detail.html', data = response)
+    
+# 댓글 등록
+@app.route("/comment", methods=['POST'])
+def comment():
+    if request.method== 'POST' :
+        if session['user_pk'] : 
+            user_pk = session['user_pk']  # user pk를 session에 저장한다.
+            comment_content = request.form['comment_content']
+            post_pk = request.form['post_pk']
+            user = User.query.filter_by(user_pk=user_pk).first()
+            comment_user_nickname = user.user_nickname
+
+            comment = Comment(post_pk = post_pk, comment_user_pk=user_pk, comment_content = comment_content, comment_user_nickname = comment_user_nickname)
+            db.session.add(comment)
+            db.session.commit()
+
+            return redirect(url_for('post_detail', post_pk = post_pk))
+
+        else : 
+            return render_template('login.html')
+
+    else : 
+        return render_template('comment.html')
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
