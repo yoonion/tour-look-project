@@ -1,7 +1,7 @@
 const duplicationBtn = document.getElementById("duplication");
 const newUserId = document.getElementById("user_id");
 
-const idDuplicationCheck = () => {
+const idDuplicationCheck = (userId) => {
   fetch("/url 입력", {
     method: "POST",
     // headers: {},
@@ -12,5 +12,6 @@ const idDuplicationCheck = () => {
 };
 
 duplicationBtn.addEventListener("click", () => {
-  // idDuplicationCheck()
+  userId = newUserId.value;
+  idDuplicationCheck(userId);
 });
