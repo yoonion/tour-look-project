@@ -35,9 +35,10 @@ class Comment(db.Model):
     post_pk = db.Column(db.Integer, nullable=False)
     comment_user_pk = db.Column(db.Integer, nullable=False)
     comment_content = db.Column(db.Text, nullable=False)
+    comment_user_nickname = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return f'게시글 고유번호={self.post_pk}, 작성자 고유번호={self.user_pk}'
+        return f'게시글 고유번호={self.post_pk}, 작성자 닉네임={self.comment_user_nickname} '
 
 with app.app_context():
     db.create_all()
@@ -111,9 +112,33 @@ def post_save():
         return render_template('post_save.html')
 
 # 게시글 상세 페이지
-@app.route("/post/<post_id>")
-def post_detail(post_id):
-    return render_template('post_detail.html')
+@app.route("/post/<post_pk>")
+def post_detail(post_pk):
+    post = Post.query.filter_by(post_pk = post_pk).first()
+    
+    if not post:
+        response = {
+            "status": 404,
+            "msg":'해당 게시글을 찾을 수 없습니다.'
+        }
+        return jsonify(response), 404
+    else:
+        title = post.post_title
+        content = post.post_content
+        category = post.post_local_cate
+        
+        response = {
+            "post_title": title,
+            "post_content": content,
+            "post_local_cate": category,
+            "comments": [
+                {
+                    "user_nickname": "사용자 닉네임",
+                    "comment_content": "사용자가 작성한 댓글 내용입니다."
+                }
+            ]
+        }
+        return render_template('post_detail.html', data = response)
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
