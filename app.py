@@ -80,6 +80,26 @@ def signup():
         return jsonify(response), 200
     else:
         return render_template('signup.html')
+    
+# 회원가입 중복 체크
+@app.route('/signup/duplicate_check', methods=['POST'])
+def duplicate_check():
+    data = request.get_json()
+    user_id = data['userId']
+
+    user = User.query.filter_by(user_id=user_id).first()
+    if user is not None: # 쿼리 데이터가 존재하면
+        response = {
+            "result": "fail",
+            "msg": "중복된 회원입니다."
+        }
+        return jsonify(response), 409
+    else:
+        response = {
+            "result": "success",
+            "msg": "중복된 회원입니다."
+        }
+        return jsonify(response), 200
 
 # 로그인 페이지
 @app.route("/login", methods=['GET', 'POST'])

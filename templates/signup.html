@@ -6,7 +6,7 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="../static/reset.css" />
     <link rel="stylesheet" href="../static/signup.css" />
-    <script src="../static/signup.js"></script>
+    <script src="../static/signup.js" defer></script>
   </head>
   <body>
     <div class="main-container">
@@ -18,7 +18,7 @@
         <div>
           <label for="user_id">ID</label>
           <input type="text" id="user_id" name="user_id" placeholder="아이디" />
-          <button id="duplication">중복 확인</button>
+          <button type="button" id="duplication">중복 확인</button>
         </div>
         <div>
           <label for="user_name">이름(닉네임)</label>
