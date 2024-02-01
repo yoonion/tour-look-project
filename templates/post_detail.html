@@ -17,26 +17,24 @@
         <p class="detail-local">추천 지역: {{ data.post_local_cate }}</p>
         <p class="detail-main">{{ data.post_content }}</p>
       </div>
-      <form action="/comment" method="POST">
+      <form action="/comment" method="POST" class="comment-form">
         <input type="hidden" name="post_pk" value="1" />
         <!-- display: flex -->
-        <label for="comment">댓글:</label>
-        <textarea
+        <label for="comment">댓글 등록</label>
+        <input
           id="comment"
           name="comment_content"
-          rows="2"
-          cols="50"
-          placeholder="100자 이내로 작성해주세요!"></textarea>
-
-        <input type="submit" value="등록" />
+          class="comment-content"
+          placeholder="댓글을 작성해주세요!" />
+        <input type="submit" value="등록" class="comment-submit" />
       </form>
 
       <div class="comment-container">
         <!-- ffor돌리기 -->
         {% for comment in data.comments %}
         <div class="comment-card">
-          <p class="comment-user">{{ comment.user_nickname }}</p>
           <p class="comment-main">{{ comment.comment_content }}</p>
+          <p class="comment-user">{{ comment.user_nickname }}</p>
         </div>
         {% endfor %}
       </div>
