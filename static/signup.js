@@ -2,12 +2,22 @@ const duplicationBtn = document.getElementById("duplication");
 const newUserId = document.getElementById("user_id");
 
 const idDuplicationCheck = (userId) => {
-  fetch("/url 입력", {
+  fetch("/signup/duplicate_check", {
     method: "POST",
-    // headers: {},
+    body: JSON.stringify({"userId": userId}),
+    headers: {
+      "Content-Type": "application/json"
+    },
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      if(data.result=='success') {
+        alert('회원 가입 가능한 아이디 입니다.')
+        document.getElementById('user_id').focus;
+      } else {
+        alert('중복된 아이디 입니다.')
+      }
+    })
     .catch((error) => console.log(error));
 };
 
