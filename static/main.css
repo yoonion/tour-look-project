@@ -72,7 +72,7 @@
 .card-container .img-box {
   width: 100%;
   overflow: hidden;
-  height: 50px;
+  height: 150px;
 }
 .card-container .img-box .thumbnail {
   display: inline-block;
