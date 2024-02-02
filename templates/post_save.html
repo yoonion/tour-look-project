@@ -13,7 +13,7 @@
         <img src="../static/tourlook_logo.svg" alt="" />
       </a>
       <h2>게시글 작성</h2>
-      <form action="/post" method="post" id="post-save-form">
+      <form action="/post" method="post" id="post-save-form" enctype="multipart/form-data">
         <div class="save-location">
           <select name="post_local_cate" id="save-location">
             <option value="전체">전체</option>
@@ -39,6 +39,9 @@
         <div class="save-main">
           <textarea name="post_content" id="save-main"></textarea>
           <span>* 본문을 작성해주세요</span>
+        </div>
+        <div class="save-img">
+          <input type="file" name="file" id="">
         </div>
         <button type="submit" id="save-button">글 등록</button>
       </form>
