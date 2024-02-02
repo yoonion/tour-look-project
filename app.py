@@ -58,7 +58,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/postlike', methods=['POST'])
 def post_like_check():
     if not session.get('user_id'):
-        return redirect(url_for('login'))
+        return jsonify({"exists": "no login"})
     
     data = request.get_json()
 

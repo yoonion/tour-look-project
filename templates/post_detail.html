@@ -60,11 +60,13 @@
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.exists == 'no') {
+          if (data.exists === 'no login') {
+            window.location.href = '/login';
+          } else if (data.exists === 'no') {
             alert('좋아요 저장')
           } else {
             alert('좋아요 취소')
-          }
+          } 
         })
         .catch((error) => console.log(error));
     };
