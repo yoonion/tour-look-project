@@ -9,10 +9,12 @@
   </head>
   <body>
     <div class="save-container">
+      <a href="/">
+        <img src="../static/tourlook_logo.svg" alt="" />
+      </a>
       <h2>게시글 작성</h2>
-      <form action="/post" method="post">
+      <form action="/post" method="post" id="post-save-form">
         <div class="save-location">
-          <label for="save-location">여행 도시</label>
           <select name="post_local_cate" id="save-location">
             <option value="전체">전체</option>
             <option value="서울">서울</option>
@@ -28,16 +30,17 @@
             <option value="제주도">제주도</option>
             <option value="울릉도/독도">울릉도/독도</option>
           </select>
+          <label for="save-location">* 여행 도시를 선택해주세요!</label>
         </div>
         <div class="save-title">
-          <label for="save-title">제목</label>
-          <textarea name="post_title" id="save-title" cols="100" rows="2"></textarea>
+          <textarea name="post_title" id="save-title"></textarea>
+          <span>* 제목을 작성해주세요</span>
         </div>
         <div class="save-main">
-          <label for="save-main">내용</label>
-          <textarea name="post_content" id="save-main" cols="100" rows="20"></textarea>
+          <textarea name="post_content" id="save-main"></textarea>
+          <span>* 본문을 작성해주세요</span>
         </div>
-        <button type="submit">글 등록</button>
+        <button type="submit" id="save-button">글 등록</button>
       </form>
     </div>
   </body>
