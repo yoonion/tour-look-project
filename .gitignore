@@ -1,6 +1,13 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,python,flask,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,python,flask,visualstudiocode
 
+## image ##
+static/post-images/*
+!static/post-images/RIJFKAFDKNSA.txt
+
+## DB ##
+database.db
+
 ### Flask ###
 instance/*
 !instance/.gitignore
