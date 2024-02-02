@@ -1,6 +1,8 @@
 .main-container {
   width: 100%;
+  padding: 100px 0;
 }
+
 .flex-container {
   display: flex;
   justify-content: center;
@@ -49,6 +51,8 @@
 
 .card-container {
   display: flex;
+  padding: 0 200px;
+  box-sizing: border-box;
   flex-wrap: wrap;
   gap: 20px;
   row-gap: 20px;
