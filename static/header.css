@@ -6,9 +6,20 @@ header {
   justify-content: space-around;
   position: fixed;
   top: 0;
+  backdrop-filter: blur(3px);
 }
 header img {
   height: 50px;
+}
+header a.post-btn {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  background-color: #0d99ff;
+  color: #fff;
+  border-radius: 6px;
+  box-sizing: border-box;
+  line-height: 30px;
 }
 
 header .header-right {
