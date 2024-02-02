@@ -40,12 +40,43 @@ class Comment(db.Model):
     def __repr__(self):
         return f'게시글 고유번호={self.post_pk}, 작성자 닉네임={self.comment_user_nickname} '
 
+class Postlike(db.Model):
+    postlike_pk = db.Column(db.Integer, primary_key=True)
+    post_pk = db.Column(db.Integer, nullable=False)
+    user_pk = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f'게시글 고유번호={self.post_pk}, 사용자 ={self.user_pk} '
+
 with app.app_context():
     db.create_all()
 
 # 업로드 파일을 저장할 폴더 설정
 UPLOAD_FOLDER = 'static/post-images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@app.route('/postlike', methods=['POST'])
+def post_like_check():
+    if not session.get('user_id'):
+        return redirect(url_for('login'))
+    
+    data = request.get_json()
+
+    post_pk = data.get('post_pk')
+    user_pk = session['user_pk']
+
+    result = Postlike.query.filter_by(user_pk = user_pk, post_pk = post_pk).first()
+    
+    if not result: # 결과 없음
+        postLike = Postlike(user_pk = user_pk, post_pk = post_pk)
+        db.session.add(postLike)
+        db.session.commit()
+
+        return jsonify({"exists": "no"})
+    else:
+        db.session.delete(result)
+        db.session.commit()
+        return jsonify({"exists": "yes"})
 
 # 메인 (리스트 지역별 검색 가능)
 @app.route("/")
